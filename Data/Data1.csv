@@ -1,4 +1,4 @@
-﻿Year,TeamId,Team,Conference,Division,ExpectedWins,Total Games,Total Wins,Total Losses,Total Ties,ConferenceGames Games,ConferenceGames Wins,ConferenceGames Losses,ConferenceGames Ties,HomeGames Games,HomeGames Wins,HomeGames Losses,HomeGames Ties,AwayGames Games,AwayGames Wins,AwayGames Losses,AwayGames Ties
+﻿Year,TeamId,team,Conference,Division,ExpectedWins,Total Games,total_wins,total_losses,Total Ties,ConferenceGames Games,ConferenceGames Wins,ConferenceGames Losses,ConferenceGames Ties,HomeGames Games,HomeGames Wins,HomeGames Losses,HomeGames Ties,AwayGames Games,AwayGames Wins,AwayGames Losses,AwayGames Ties
 2015,2132,Cincinnati,American Athletic,East,8.3,13,7,6,0,8,4,4,0,6,5,1,0,6,2,4,0
 2006,2132,Cincinnati,Big East,,0,13,8,5,0,7,4,3,0,8,7,1,0,5,1,4,0
 1954,2132,Cincinnati,FBS Independents,,0,10,8,2,0,2,2,0,0,7,5,2,0,3,3,0,0

@@ -74,11 +74,102 @@ df = pd.read_csv('Data/Recruiting.csv')
 print(df.head())
 
 
+# ## Explatory Data Analysis
+# 
+
+# In[4]:
+
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
+
+data1 = pd.read_csv("./Data/Data1.csv")
+recruiting_data = pd.read_csv("./Data/Recruiting.csv")
+
+merged_data = pd.merge(data1, recruiting_data, on=["Year", "Team"], how="left")
+
+data1_summary = data1.describe()
+recruiting_data_summary = recruiting_data.describe()
+
+plt.figure(figsize=(8, 5))
+sns.histplot(data=data1, x="Total Wins", bins=10, kde=True)
+plt.title("Distribution of Total Wins")
+plt.xlabel("Total Wins")
+plt.ylabel("Frequency")
+plt.show()
+
+numeric_data1 = data1.select_dtypes(include=['int64', 'float64'])
+
+plt.figure(figsize=(12, 8))
+sns.heatmap(numeric_data1.corr(), annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
+plt.title("Correlation Heatmap - Data1.csv")
+plt.show()
+
+
+plt.figure(figsize=(8, 5))
+sns.boxplot(data=recruiting_data, x="Points")
+plt.title("Boxplot of Points")
+plt.show()
+
+plt.figure(figsize=(8, 5))
+sns.scatterplot(data=merged_data, x="Points", y="Total Wins")
+plt.title("Scatter Plot: Points vs Total Wins")
+plt.xlabel("Points")
+plt.ylabel("Total Wins")
+plt.show()
+
+data1_missing = data1.isnull().sum()
+recruiting_data_missing = recruiting_data.isnull().sum()
+data1_duplicates = data1.duplicated().sum()
+recruiting_data_duplicates = recruiting_data.duplicated().sum()
+
+{
+    "Data1 Summary": data1_summary,
+    "Recruiting Data Summary": recruiting_data_summary,
+    "Missing Values in Data1": data1_missing,
+    "Missing Values in Recruiting Data": recruiting_data_missing,
+    "Duplicate Values in Data1": data1_duplicates,
+    "Duplicate Values in Recruiting Data": recruiting_data_duplicates
+}
+
+
+# ## Data Cleaning
+
+# In[5]:
+
+
+data1_cleaned = data1.drop(columns=['Division'])
+
+missing_values_data1 = data1_cleaned.isnull().sum()
+
+data1_cleaned_info = data1_cleaned.info()
+
+upper_limit = data1_cleaned['Total Wins'].quantile(0.95)
+data1_cleaned = data1_cleaned[data1_cleaned['Total Wins'] <= upper_limit]
+
+data1_cleaned = data1_cleaned.drop_duplicates()
+
+merged_cleaned_data = pd.merge(data1_cleaned, recruiting_data, on=["Year", "Team"], how="left")
+
+merged_cleaned_missing = merged_cleaned_data.isnull().sum()
+merged_cleaned_shape = merged_cleaned_data.shape
+
+{
+    "Missing Values in Cleaned Data1": missing_values_data1,
+    "Data1 Cleaned Info": data1_cleaned_info,
+    "Outliers Removed (95th Percentile of Total Wins)": upper_limit,
+    "Missing Values in Merged Dataset": merged_cleaned_missing,
+    "Merged Dataset Shape": merged_cleaned_shape
+}
+
+
 # ## Resources and References
 # *What resources and references have you used for this project?*
 # 📝 <!-- Answer Below -->
 
-# In[7]:
+# In[6]:
 
 
 # ⚠️ Make sure you run this cell at the end of your notebook before every submission!
